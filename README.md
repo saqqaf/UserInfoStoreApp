@@ -64,7 +64,7 @@ SPRING_JPA_HIBERNATE_DDL_AUTO: update
 SPRING_JPA_SHOW_SQL: "true"
 ```
 
-9. Run the application using the following command: `java -jar app.jar`
+9. Run the application using the following command: `java -jar rihal-0.0.1-SNAPSHOT.jar`
 
 10. Test the application in the browser by navigating to http://localhost:8080/
 
