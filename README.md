@@ -1,4 +1,4 @@
-# Spring Boot MVC Application with MySQL
+# User Information Store - Spring Boot MVC Application with MySQL
 
 This repository contains a Spring Boot MVC application that stores user information in a MySQL database. 
 
@@ -20,6 +20,8 @@ Before you begin, ensure you have the following installed on your machine:
 
 1. Go to the original repository: [Link of Repo](https://github.com/CodelineAtyab/UserInfoStoreApp)
 2. Click the `Fork` button on the top right to create your own copy of the repository.
+
+Note: Please watch [this youtube video](https://www.youtube.com/watch?v=CML6vfKjQss) if you want to know just the submission process. Its the same as contributing to an open-source project.
 
 ### 2. Clone Your Forked Repository
 
@@ -53,11 +55,20 @@ docker run --name mysql-cont -p 3307:3307 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_D
 
 7. Verify that the DB server is accessible on port `3307` by connecting it using DBVisualizer or any other DB Client Application.
 
-8. Run the application using the following command: `java -jar app.jar`
+8. Now set the following environment variables before running the java application:
+```bash
+SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/usersystem?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+SPRING_DATASOURCE_USERNAME: root
+SPRING_DATASOURCE_PASSWORD: root
+SPRING_JPA_HIBERNATE_DDL_AUTO: update
+SPRING_JPA_SHOW_SQL: "true"
+```
 
-9. Test the application in the browser by navigating to http://localhost:8080/
+9. Run the application using the following command: `java -jar app.jar`
 
-10. Make sure the data is save in the DB by creating some users, updating any specific user and deleting one user. If we restart the application, the data should remain as is.
+10. Test the application in the browser by navigating to http://localhost:8080/
+
+11. Make sure the data is save in the DB by creating some users, updating any specific user and deleting one user. If we restart the application, the data should remain as is.
 
 #### Some important things to note:
 
@@ -68,13 +79,19 @@ docker run --name mysql-cont -p 3307:3307 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_D
 - You can simply write the Dockerfile by looking at the commands mentioned in steps 3 and 8. This will let you run the application within a container without the need to install java and maven on your PC.
 
 ### 5. Create docker-compose.yml
-Create a docker-compose.yml file in the root directory.
 
-Make sure to specify a volume for MySQL Database, so the data can be stored on your local machine.
+- Create a docker-compose.yml file in the root directory.
 
-This is useful for backing up the data in case the container is deleted.
+- Make sure to specify a volume for MySQL Database, so the data can be stored on your local machine. This is useful for backing up the data in case the container is deleted.
 
-This is the container's path `/var/lib/mysql` that should be mounted to a volume.
+- This is the container's path `/var/lib/mysql` that should be mounted to a volume.
+
+- Make sure, all environment variables are set for the Java application as well as the Database.
+
+- Make sure the correct port mapping is specified for both applications.
+
+- Containers of both applications should be part of the same internal network.
+
 
 ### 6. Build and Run the Containers
 Run the following command to build and start the containers:
@@ -94,3 +111,21 @@ Once the containers are up and running, you can access the application at `http:
 ```bash
 docker-compose down
 ```
+
+### 9. Steps for submitting the solution
+Once you have verified that the application can be accessed after running `docker-compose up`. Please push all of the changes by running the following commands:
+
+1. `git add *`
+2. `git commit -m "Added dockerfile and docker-compose"`
+3. `git push`
+
+Now, goto to your browser and refresh the page for your forked github repository and do the following:
+
+1. Click on a green button that displays: **Compare & pull request** 
+2. Put something understandable in the title like **Containerized App and DB**
+3. In the description, just briefly describe, how you came up with this solution having a Docker and Docker Compose file.
+4. Click on **Create pull request**
+5. Please Send a message on slack in **general** channel with the link of your Pull Request and ask for code reviews.
+
+Thats it !
+Best of luck
